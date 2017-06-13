@@ -18,7 +18,7 @@ ArgumentError
 
 PUTS vs PRINT
 -both print to the console
--PUTS adds a new line after executing
+-PUTS adds a new line after executing and *always has a nil return value* 
    - puts = "output string"
     3.times { print "Hello!" }
     # > Hello!Hello!Hello!
@@ -148,7 +148,7 @@ CASE statement
   + when condition_to_test
     + code to execute
   + end
-=> case statements actually evaluate their when conditionals by implicitly using the "case equality operator" (===) 
+=> case statements actually evaluate their when conditionals by implicitly using the "case equality operator" (===)
 
 
 case name
@@ -231,3 +231,5 @@ Method Scope
 - "def" and "end" = gates
 - methods cannot access variables outside until you pass them in as an argument
 - variable defined inside a method can't leave that method.
+
+----

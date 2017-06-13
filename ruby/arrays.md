@@ -12,48 +12,6 @@ ARRAYS
   my_array = Array.new => [ ]
 - Literal Constructor
   variable_name = ["item 1", 2, "item 3", true, false, 6]
-
-----
-- Adding elements:
-  + << "shovel" operator will add one element to the end of an array (most popular)
-    famous_cats = ["lil' bub", "grumpy cat", "Maru"]
-    famous_cats << "nala cat"
-    famous_cats #=> ["lil' bub", "grumpy cat", "Maru", "nala cat"]
-
-  + .push() => add multiple elements to end of array
-    famous_cats.push('simba')
-      => ["lil' bub", "grumpy cat", "Maru", "nala cat", "simba"]
-
-  + .unshift() => add element to the front of array
-    famous_cats.unshift('tabitha')
-      => ["tabitha, ""lil' bub", "grumpy cat", "Maru", "nala cat", "simba"]
----
-- Removing elements:
-  + .pop() => removes last item from end of array and returns that element
-    last_cat = famous_cats.pop => "simba"
-    famous_cats.inspect => ["tabitha, ""lil' bub", "grumpy cat", "Maru", "nala cat"]
-
-  + .shift() => removes first item from front of array and returns it
-    => first_cat = famous_cats.shift => "tabitha"
-    famous_cats.inspect => ["lil' bub", "grumpy cat", "Maru", "nala cat"]
-----
-- Other Array Methods:
-  + .reverse => reverse the order of the array
-  + .include?() => returns boolean of whether or not array contains element
-  + .inspect => returns string of the list of strings in an array
-  + .first => first element in array
-  + .last => last element in array
-  + .index() => returns the first index of an element that matches the argument. if nothing matching it returns 'nil'. not used often because you typically use the index to access the info and not the other way around
-    my_array = ["yoga", "soccer", "running"]
-    my_array.index("soccer") => 1
-  + .sort => sorts the array (A-Z or 0-10)
-    => works by implicitly comparing elements with the "spaceship" operator <=> and moves them accordingly
-    => does not affect the original array
-    => returns a new array that you will usually want to store in a new variable
-  + .sort! => will sort the original array. you will not have to store it in a new one
-  + .size => returns the number of elements in an array
-  + .collect => creates a new array that contains the values returned by the block (like #each but new array is returned)
-  *'!' is a ruby convention that says do the operation in place - modifies the receiver of the dot method*
 ----
 
 Nested Arrays
@@ -131,6 +89,84 @@ Conversions
   - .join() => convert array to string; optional argument of the char(s) to be inserted between each array element (default is "")
     ["a", "b", "c"].join
       => "abc"
-      
+
     ["a", "b", "c"].join(" :-) ")
       => "a :-) b :-) c"
+
+----
+ARRAY METHODS
+
+- Adding elements:
+  + << "shovel" operator will add one element to the end of an array (most popular)
+    famous_cats = ["lil' bub", "grumpy cat", "Maru"]
+    famous_cats << "nala cat"
+    famous_cats #=> ["lil' bub", "grumpy cat", "Maru", "nala cat"]
+
+  + .push() => add multiple elements to end of array
+    famous_cats.push('simba')
+      => ["lil' bub", "grumpy cat", "Maru", "nala cat", "simba"]
+
+  + .unshift() => add element to the front of array
+    famous_cats.unshift('tabitha')
+      => ["tabitha, ""lil' bub", "grumpy cat", "Maru", "nala cat", "simba"]
+---
+- Removing elements:
+  + .pop() => removes last item from end of array and returns that element
+    last_cat = famous_cats.pop => "simba"
+    famous_cats.inspect => ["tabitha, ""lil' bub", "grumpy cat", "Maru", "nala cat"]
+
+  + .shift() => removes first item from front of array and returns it
+    => first_cat = famous_cats.shift => "tabitha"
+    famous_cats.inspect => ["lil' bub", "grumpy cat", "Maru", "nala cat"]
+----
++ .reverse => reverse the order of the array
++ .include?() => returns boolean of whether or not array contains element
++ .inspect => returns string of the list of strings in an array
++ .first => first element in array
++ .last => last element in array
++ .index() => returns the first index of an element that matches the argument. if nothing matching it returns 'nil'. not used often because you typically use the index to access the info and not the other way around
+  my_array = ["yoga", "soccer", "running"]
+  my_array.index("soccer") => 1
++ .sort => sorts the array (A-Z or 0-10)
+  => works by implicitly comparing elements with the "spaceship" operator <=> and moves them accordingly
+  => does not affect the original array
+  => returns a new array that you will usually want to store in a new variable
++ .sort! => will sort the original array. you will not have to store it in a new one
++ .size => returns the number of elements in an array
++ .collect => creates a new array that contains the values returned by the block (like #each but new array is returned)
+*'!' is a ruby convention that says do the operation in place - modifies the receiver of the dot method*
+
++ #each
+  - remember that this does not change the return value
+  - it implicitly returns the original array
+  - *use when you want to return the original return value*
+  - to capture the results of #each you can create a new array to capture those elements and explicitly return it after the loops
+
++ #map
+  - an abstraction of #each
+  - will implicitly return the new values and change the original value
+  - *use when you want to the transformations to be reflected in the return value*
+      toppings = ["pickles", "mushrooms", "bacon"]
+
+      def hamburger(toppings)
+        toppings.map do |topping|
+          puts "I love #{topping} on my burgers!"
+        end
+      end
+      => Prints:
+         I love pickles on my burgers!
+         I love mushrooms on my burgers!
+         I love bacon on my burgers!
+         Returns: [nil, nil, nil]
+
++ #collect
+  - an abstraction of #each  
+  - will implicitly return the new values and change the original value
+  - *use when you want to the transformations to be reflected in the return value*
+      toppings = ["pickles", "mushrooms", "bacon"]
+      def burger(toppings)
+        toppings.collect do |topping|
+          "I love #{topping} on my burgers"
+        end
+      end
+      => Returns: ["I love pickles on my burgers", "I love mushrooms on my burgers", "I love bacon on my burgers"]
