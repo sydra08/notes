@@ -51,8 +51,8 @@ ARRAYS
     => does not affect the original array
     => returns a new array that you will usually want to store in a new variable
   + .sort! => will sort the original array. you will not have to store it in a new one
-  + .size => returns the number of elements in an array 
-
+  + .size => returns the number of elements in an array
+  + .collect => creates a new array that contains the values returned by the block (like #each but new array is returned)
   *'!' is a ruby convention that says do the operation in place - modifies the receiver of the dot method*
 ----
 
@@ -113,3 +113,24 @@ music_library = [["Adele", ["19", ["Day Dreamer", "Best for Last"]],
       end
     end
   end
+
+----
+Conversions
+
++ string => array
+  - .split() => convert a string into an array; argument is the separator
+    "hippo,giraffe,monkey,horse".split(",")
+      => ["hippo", "giraffe", "monkey", "horse"]
+
++ range => array
+  - .to_a => convert a range of numbers into an array
+    (1..10).to_a
+      => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
++ array => string
+  - .join() => convert array to string; optional argument of the char(s) to be inserted between each array element (default is "")
+    ["a", "b", "c"].join
+      => "abc"
+      
+    ["a", "b", "c"].join(" :-) ")
+      => "a :-) b :-) c"

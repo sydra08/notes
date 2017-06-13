@@ -113,3 +113,8 @@ brothers = ["Tim", "Tom", "Jim"]
 brothers.each{|brother| puts "Stop hitting yourself #{brother}!"}
 
 ----
+
+#each_with_index
+- #each but also passes the index in 
+["cat","dog","bat"].each_with_index{|item,index| hash[item]=index}
+  => {"cat"=>0, "dog"=>1, "bat"=>2}
