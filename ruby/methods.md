@@ -18,7 +18,7 @@ ArgumentError
 
 PUTS vs PRINT
 -both print to the console
--PUTS adds a new line after executing and *always has a nil return value* 
+-PUTS adds a new line after executing and *always has a nil return value*
    - puts = "output string"
     3.times { print "Hello!" }
     # > Hello!Hello!Hello!
@@ -27,7 +27,7 @@ PUTS vs PRINT
     # > Hello!
     # > Hello!
     # > Hello!
-
+---
 RETURN VALUE
 - data returned to the program by the execution of a method
 - disrupts the execution of your method
@@ -36,6 +36,7 @@ RETURN VALUE
 - return value is the data returned to the program
 - how diff parts of your program communicate with one another
 
+---
 Default Arguments
 - you can define a method where the arguments are not required
   ie.
@@ -218,6 +219,34 @@ built in methods
   - returns empty array if none of the elements eval to true
   - always returns an array
 
+#block_given? => determine if the method is called with a block or not
+
+#delete_if? => deletes every element of the array when the block evals to true
+
+#sort => iterates over collection and
+  - you can use comparison operators (< >) with strings too
+    - if the first letter of a string is later in the alphabet than the other it will return true
+      - ie. "zoo" > "apple" => true
+  - the method will iterate over array and yields a block with 2 elements
+    - That block *must* be a comparator, so it should compare the two elements and return 0 if they are the same, -1 if the first is less than the second, and 1 if the first is greater than the second
+  array = [7, 3, 1, 2, 6, 5]
+
+  array.sort do |a, b|
+    if a == b
+      0 #stay in current places
+    elsif a < b
+      -1 #stay in current places
+    elsif a > b
+      1 #switch a and b
+    end
+  end
+  --- which is the same as the below ---
+  array = [7, 3, 1, 2, 6, 5]
+
+  array.sort do |a, b|
+    a <=> b #combined comparison operator (if you switch a and b you get reverse order)
+  end
+
 ----
 SCOPE
 - not all variables exist everywhere in a program
@@ -233,3 +262,63 @@ Method Scope
 - variable defined inside a method can't leave that method.
 
 ----
+YIELD keyword
+
+- when used inside of a method it will allow you to call the method with a block of code and pass the torch to that block
+- yield = "Stop executing the code in this method, and instead execute the code in this block. Then, return to the code in the method."
+- if you pass it an argument then it will pass it to the block (aka it'll be available to the block)
+- each time you use yield(some_argument) in the body of a method, it passes some_argument to the block you call that method with.
+
+def yielding
+  puts "the program is executing the code inside the method"
+  yield
+  puts "now we are back in the method"
+end
+
+yielding { puts "the method has yielded to the block!" }
+=> the program is executing the code inside the method
+   the method has yielded to the block!
+   now we are back in the method
+
+---
+def yielding_with_arguments(num)
+  puts "the program is executing the code inside the method"
+  yield(num)
+  puts "now we are back in the method"
+end
+
+yielding_with_arguments(2) {|i| puts i * 2}
+=> the program is executing the code inside the method
+   4
+   now we are back in the method
+=> here the |i| is the placeholder for the argument
+---
+*replaces #collect*
+def hello(array)
+  i = 0
+  collection = []
+  while i < array.length
+    collection << yield(array[i])
+    i += 1
+  end
+  collection
+end
+---
+*replaces #each*
+def my_each(arr)
+  i = 0
+  while i < arr.length
+    yield(arr[i])
+    i += 1
+  end
+  arr
+end
+---
+*replaces #find*
+def my_find(collection)
+  i = 0
+  while i < collection.length
+    return collection[i] if yield(collection[i])
+    i = i + 1
+  end
+end

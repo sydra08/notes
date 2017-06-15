@@ -60,6 +60,7 @@ WHILE
 - execute a block as long as a specific condition is true
 - a little more abstract than Loop
 - because the conditional is set early on, you do not need to explicitly break the loop
+- return value is always nil
 
 ie. while the counter is less than 20, do something
 counter = 0
@@ -115,6 +116,6 @@ brothers.each{|brother| puts "Stop hitting yourself #{brother}!"}
 ----
 
 #each_with_index
-- #each but also passes the index in 
+- #each but also passes the index in
 ["cat","dog","bat"].each_with_index{|item,index| hash[item]=index}
   => {"cat"=>0, "dog"=>1, "bat"=>2}

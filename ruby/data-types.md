@@ -5,6 +5,8 @@ STRINGS
 -literal vs class constructor methods
   -literal: "Hello"
   -class constructor: String.new("Hello")
+- every time you create a string, ruby creates a new object in memory, even if the text is identical
+- strings are mutable (modifiable)
 
 BOOLEANS
 -don't operate on them

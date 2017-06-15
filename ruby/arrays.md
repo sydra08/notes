@@ -141,8 +141,9 @@ ARRAY METHODS
   - it implicitly returns the original array
   - *use when you want to return the original return value*
   - to capture the results of #each you can create a new array to capture those elements and explicitly return it after the loops
+  - this implicitly takes a block as its argument and yields each element to the block
 
-+ #map
++ #map (this can be used interchangeably with #collect)
   - an abstraction of #each
   - will implicitly return the new values and change the original value
   - *use when you want to the transformations to be reflected in the return value*
@@ -159,9 +160,10 @@ ARRAY METHODS
          I love bacon on my burgers!
          Returns: [nil, nil, nil]
 
-+ #collect
++ #collect (this can be used interchangeably with #map)
   - an abstraction of #each  
   - will implicitly return the new values and change the original value
+  - this implicitly takes a block as its argument and yields each element to the block
   - *use when you want to the transformations to be reflected in the return value*
       toppings = ["pickles", "mushrooms", "bacon"]
       def burger(toppings)
