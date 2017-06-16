@@ -6,6 +6,7 @@ HASHES
   - set equal to associated value with => ("hash rocket")
   - you can use it to store pairs of item/count
 - each key/value pair describes a unique attribute or unit of information.
+- value = can be a single value or a collection of objects
 - LITERAL: my_hash = {}
 - to access data: my_hash[key]
    - "bracket method"
@@ -23,7 +24,10 @@ HASHES
   "porcelain vase" => 2,
   "oil painting" => 3
   }
-
++ flatiron_school = {
+  instructors: ["Avi", "Jeff", "Rose"],
+  dev_team: ["Jonas", "Logan", "Amanda", "Seiji", "Kate", "Spencer"]
+  }
 
 SYMBOLS
 - :i_am_a_symbol
@@ -37,3 +41,53 @@ SYMBOLS
           age
       end
       => returns an array with all of the ages
+
+---
+Nested Hashes
+
+    contacts = {
+      "Jon Snow" => {
+        name: "Jon",
+        email: "jon_snow@thewall.we",
+        favorite_ice_cream_flavors: ["chocolate", "vanilla"]  },
+      "Freddy Mercury" => {
+        name: "Freddy",
+        email: "freddy@mercury.com",
+        favorite_ice_cream_flavors: ["strawberry", "cookie dough", "mint chip"]
+      }
+    }
+
+- good to store and operate on complex associated data in a program
+- definitely encounter when working with APIs
+  - look at NYC Open Data
+- you can still add to nested hashes:
+  - you can add to an array inside the hash
+    - ie. contacts["Jon Snow"][:favorite_ice_cream_flavors] << "mint chip" #=> add mint chip to the list of favorite flavors
+  - you can add a new key/value pair to one of the nested hashes
+    1) access the hash level that you want to add the key/value pair to
+    2) create the new key value with [ ] notation
+      ie. contacts["Jon Snow"][:address] = "The Lord Commander's Rooms, The Wall, Westeros"
+
+- iterating over nested hashes: you may need to nest iterators in order to access the necessary info
+
+METHODS
+
+#values => collect all of the values in a hash as an array
+
+#keys => collect all of the keys in a hash as an array
+
+#min => return array with the key/value pair whose key is the lowest value
+
+#flatten => you can use this to turn an array of arrays into one (flat) array
+
+
+def remove_strawberry(contacts)
+  contacts.each do |person, contact_details_hash|
+    contact_details_hash.each do |attribute, data|
+      if attribute == :favorite_ice_cream_flavors
+        data.delete_if {|ice_cream| ice_cream == "strawberry"}
+      end
+    end
+  end
+end
+ => remove strawberry ice cream from the favorite_ice_cream_flavors array
