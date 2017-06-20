@@ -203,6 +203,7 @@ kanye.name #=> "Kanye"
 kanye.name = "Yeezy"
 kanye.name #=> "Yeezy"
 
+---
 #INITIALIZE
 - assign instances different attributes/behavior when they are instantiated
 - automatically called whenever you call #new
@@ -311,8 +312,6 @@ class Person
   attr_accessor :name
 end
 
-
-
 *attr_accessor :name, :weight, :eye_color, etc*
   - shortcut (MACRO) to avoiding having to spell out the reader and writer for each attribute you want to give your object
   - every one comes with 2 methods
@@ -323,3 +322,23 @@ end
 *attr_reader*
   - create just readers
   - ie. name
+
+---
+OBJECT COLLABORATION
+- you can set another class instance to be an attribute of another class instance
+- you can reciprocate the relationships
+
+
+----
+Class Constant
+- available to all instances of a particular class
+- usually signified by all caps
+
+:: => "name spacing"
+  - the thing on the right is a thing defined within the context (name space) of the thing on the left
+
+---
+**In object orientation, we think of our classes as templates for objects. The instances of our classes are thought of as objects.**
+---
+DOMAIN MODEL
+- representation of real-world concepts in software
