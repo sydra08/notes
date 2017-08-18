@@ -28,6 +28,7 @@ CLASS + INSTANCES
 
 RESPONSIBILITY => is it the class or the instance?
 
+---
 CLASS
 - a "blueprint" that defines how to build an object (behavior and info)
   ie. blueprints show how to build a house but are not the actual house
@@ -78,6 +79,7 @@ defining a class:
       8.weird? => false; odd? == self.odd?
   ie. self.all
 
+---
 INSTANCE
 - single occurrence of an object (the individual object made from the class)
 - create an instance of a class:
